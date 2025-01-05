@@ -30,7 +30,7 @@ exports.verifySignuBody = async(req,res,next)=>{
       const user = await user_model.findOne({userId:req.body.userId});
       if(user){
         return res.status(400).send({
-            message:"faied userid allredy present"
+            message:"UserId already exists"
         })
       }
       //check if same email

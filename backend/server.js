@@ -1,11 +1,14 @@
 const express = require("express")
 const mongoose = require('mongoose')
 const server_config =require("./configs/server.config");
+const cors = require('cors')
 const db_config = require("./configs/db.config");
 const user_modal = require("./models/user.model");
 const bcrypt = require('bcryptjs')
  const app = express()
  app.use(express.json())
+ app.use(cors());
+
 //step2: logic to connect the data base
 mongoose.connect(db_config.DB_URL);
 const db = mongoose.connection
@@ -45,3 +48,6 @@ require("./routes/auth.routes")(app)
 app.listen(server_config.PORT,()=>{
     console.log("server started at port number :",server_config.PORT)
 })
+app.get('/', (req, res) => {
+    res.send('Backend server is running!');
+});
